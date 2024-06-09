@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: 'bandportal'
     networks: [backend]
   backend:
-    image: gitlab.fit.cvut.cz:5050/stehlvo2/bandportal/bandportal-backend:master
+    image: stehlvo2/bandportal-backend:0.1
     depends_on:
       - postgres
     restart: always
@@ -18,7 +18,7 @@ services:
       - '8080:8080'
     networks: [backend]
   dashboard:
-    image: gitlab.fit.cvut.cz:5050/stehlvo2/bandportal/bandportal-dashboard:master
+    image: stehlvo2/bandportal-frontend:0.1
     depends_on:
       - backend
     restart: always
