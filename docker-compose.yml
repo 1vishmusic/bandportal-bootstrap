@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: 'bandportal'
+      POSTGRES_USER: 'bandportal'
+      POSTGRES_PASSWORD: 'bandportal'
+    networks: [backend]
+  backend:
+    image: gitlab.fit.cvut.cz:5050/stehlvo2/bandportal/bandportal-backend:master
+    depends_on:
+      - postgres
+    restart: always
+    ports:
+      - '8080:8080'
+    networks: [backend]
+  dashboard:
+    image: gitlab.fit.cvut.cz:5050/stehlvo2/bandportal/bandportal-dashboard:master
+    depends_on:
+      - backend
+    restart: always
+    ports:
+      - '3000:3000'
+    networks: [backend]
+
+networks:
+  backend: null
